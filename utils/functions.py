@@ -4,7 +4,7 @@ import math as m
 import matplotlib.pyplot as plt
 
 from scipy.optimize import least_squares, minimize, fmin_slsqp
-from utils.tracking import background_model, plotting_model
+# from utils.tracking import background_model, plotting_model
 
 
 def fwhm_pv(fG, fL):
