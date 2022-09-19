@@ -68,8 +68,9 @@ def plot_giwaxs(SciAnalysis_PATH, cal, mask, image_file, vmin, vmax):
     pc = ax.pcolor(cal.qr_map_data, cal.qz_map_data,giwaxs, cmap = 'jet', vmin =vmin, vmax = vmax)
 
     ax.set_xlim([-.15,2.2])
-    ax.set_ylim([0,2.2])
+    ax.set_ylim([-.1,2.2])
     ax.set_yticks(np.arange(0,2.2,.5))
+    ax.set_xticks(np.arange(0,2.2,.5))
     # fig.colorbar(pc, ax = ax)
     # ax.tick_params(axis='x', which='minor', bottom=True)
     ax.xaxis.set_minor_locator(AutoMinorLocator())
