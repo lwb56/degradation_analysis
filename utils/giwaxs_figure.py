@@ -5,7 +5,10 @@ import numpy as np
 import scipy as sp
 import pandas as pd
 import PIL as pl
+from imageio import imread
 
+
+# from scipy.misc import imread
 
 
 def plot_giwaxs(SciAnalysis_PATH, cal, mask, image_file, vmin, vmax):
@@ -49,6 +52,8 @@ def plot_giwaxs(SciAnalysis_PATH, cal, mask, image_file, vmin, vmax):
     # loading the image using PIL
     data = pl.Image.open(image_file)
 
+    # image = imread(image_file)
+
     cal._generate_qxyz_maps()
 
     image = np.array(data)
@@ -59,9 +64,11 @@ def plot_giwaxs(SciAnalysis_PATH, cal, mask, image_file, vmin, vmax):
     giwaxs = np.log(np.abs(image+11))
     giwaxs = giwaxs**2
 
+    # giwaxs = image
+
     # print(image.data)
     # using the calibration file, we can extract the q maps specifically (Qr vs QZ)
-    fig = plt.figure(figsize = (9,9))
+    fig = plt.figure(figsize = (10,9))
     ax = fig.gca()
     # pc = ax.pcolor(cal.qr_map_data, cal.qz_map_data,giwaxs, cmap = 'plasma', norm= colors.Normalize(vmin= None, vmax = None))
     
@@ -69,6 +76,11 @@ def plot_giwaxs(SciAnalysis_PATH, cal, mask, image_file, vmin, vmax):
 
     ax.set_xlim([-.15,2.2])
     ax.set_ylim([-.1,2.2])
+
+    # ax.set_xlim([-2.2,2.2])
+    # ax.set_ylim([-.1,2.2])
+
+
     ax.set_yticks(np.arange(0,2.2,.5))
     ax.set_xticks(np.arange(0,2.2,.5))
     # fig.colorbar(pc, ax = ax)
@@ -77,6 +89,7 @@ def plot_giwaxs(SciAnalysis_PATH, cal, mask, image_file, vmin, vmax):
     ax.yaxis.set_minor_locator(AutoMinorLocator())
     ax.set_xlabel("$q_r (\AA^{-1})$")
     ax.set_ylabel("$q_z (\AA^{-1})$")
+    fig.colorbar(pc)
 
 
     return None
